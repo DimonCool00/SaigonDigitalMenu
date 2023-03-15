@@ -10,3 +10,18 @@ export default {
 
 }
 </script>
+
+<style>
+.product-popup {
+  background: white !important;
+  max-width: 390px;
+  padding: 22px 15px;
+  align-self: flex-end  !important;
+  margin: 0 !important;
+}
+@media screen and (max-width: 600px) {
+  .product-popup {
+    max-width: 100%;
+  }
+}
+</style>
