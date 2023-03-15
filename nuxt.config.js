@@ -40,18 +40,23 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // '@nuxtjs/axios',
+    '@nuxtjs/axios',
     '@nuxtjs/proxy',
   ],
-  proxy: {
-    '/api/': {
-      target: 'https://testapi.rst.ozo.direct/api/',
-      pathRewrite: {
-        '^/api/': ''
-      },
-      changeOrigin: true
-    }
+
+  axios: {
+    // baseURL: "https://testapi.rst.ozo.direct/api/"
   },
+
+  // proxy: {
+  //   '/api/': {
+  //     target: 'https://testapi.rst.ozo.direct',
+  //     pathRewrite: {
+  //       '^/api/': ''
+  //     },
+  //     changeOrigin: true
+  //   }
+  // },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
