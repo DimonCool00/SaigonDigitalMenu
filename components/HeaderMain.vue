@@ -1,6 +1,7 @@
 
 <template>
     <div class="header-container">
+      <vm-back-top :duration="250"></vm-back-top>
         <div class="header-content">
             <div class="header-logo">
                 <nuxt-link to="/">
@@ -12,11 +13,11 @@
                 <input type="text" placeholder="Поиск" class="search-input">
             </div>
         </div>
-            <div class="menu-wrapper menu">
+            <div class="menu-wrapper sticky-element menu" v-scroll="stickyElement">
                 <v-scroll>
                     <ul class="menu-items" >
                         <li v-for="(item, index) in menuItems" :key="item.id">
-                            <a :ref="`menuitem-${index}`" :href="`#menuitem-${index}`" :class="`menunav-${index}`">{{ item.text }}</a>
+                            <a :ref="`menuitem-${item.textNum}`" :href="`#menuitem-${item.textNum}`" :class="`menunav-${index}`">{{ item.text }}</a>
                         </li>
                     </ul>
                 </v-scroll>
@@ -26,12 +27,27 @@
 
 
 <style scoped>
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  height: 50px;
+  background: #FFFFFF;
+  scroll-margin-top: 100px;
+  margin-bottom: 20px;
+}
+.category-padding {
+  padding-top: 45px;
+}
 .header-content {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   /* margin-top: 60px; */
+  margin-bottom: 18px;
 }
 .header-container {
     /* position: relative; */
@@ -75,9 +91,9 @@
   /* overflow-x: auto; */
   overflow-x: scroll; /* добавляем горизонтальную прокрутку при необходимости */
   list-style: none;
-  margin-top: 18px;
   white-space: nowrap;
   box-shadow: 0px 3px 4px rgba(137, 113, 113, 0.09);
+  height: 45px;
   /* position: fixed;
   top: 40;
   left: 0;
@@ -140,6 +156,29 @@
     line-height: 19px;
     color: #000;
 } */
+:deep(.vm-back-top-inner:hover) {
+  background-color: #E40613;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+:deep(.vm-back-top-inner) {
+  background-color: #E40613;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+:deep(.vm-back-top i) {
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 15px;
+  /* border-radius: 50%; */
+  /* padding: 20px; */
+}
 </style>
 
 <script>
@@ -155,9 +194,9 @@ export default {
         drawer: false,
         group: null,
         menuItems: [
-        { id: 1, text: 'Завтраки', link: '/' },
-        { id: 2, text: 'Салаты и закуск', link: '/about' },
-        { id: 3, text: 'Супы', link: '/services' },
+        { id: 1, text: 'Завтраки', textNum: '5', link: '/' },
+        { id: 2, text: 'Салаты и закуски', textNum: '10', link: '/about' },
+        { id: 3, text: 'Супы', textNum: '21', link: '/services' },
         { id: 4, text: 'Мясо и Тофу', link: '/products' },
         { id: 5, text: 'Морепродукты и рыба', link: '/contacts' },
         { id: 6, text: 'Лапша и рис', link: '/sitemap' },
@@ -178,6 +217,16 @@ export default {
     // },
     },
   methods: {
+    stickyElement() {
+      const stickyEl = document.querySelector('.sticky-element');
+      const scrollTop = window.pageYOffset;
+
+      if (scrollTop > 120) {
+        stickyEl.classList.add('sticky');
+      } else {
+        stickyEl.classList.remove('sticky');
+      }
+    }
   }
 };
 

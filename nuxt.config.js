@@ -27,6 +27,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/vue-multiple-back-top.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -44,6 +45,13 @@ export default {
     '@nuxtjs/proxy',
   ],
   proxy: {
+    // '/api/': {
+    //   target: 'https://api.rst.ozo.direct/api/',
+    //   pathRewrite: {
+    //     '^/api/': ''
+    //   },
+    //   changeOrigin: true
+    // },
     '/api/': {
       target: 'https://testapi.rst.ozo.direct/api/',
       pathRewrite: {

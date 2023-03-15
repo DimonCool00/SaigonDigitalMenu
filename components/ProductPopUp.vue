@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="product-image-modal">
-                    <img :src="`https://testapi.rst.ozo.direct${product.images[0].imagePath}`" alt="Product Image">
+                    <img :src="`https://testapi.rst.ozo.direct`" alt="Product Image">
                 </div>
                 <div class="product-detail-modal">
                     <button @click="$emit('close')">Закрыть</button>
@@ -25,12 +25,12 @@
   
   <script>
   export default {
-        props: {
-        product: {
-        type: Object,
-        required: true,
-        },
-    },
+    //     props: {
+    //     product: {
+    //     type: Object,
+    //     required: true,
+    //     },
+    // },
     data() {
       return {
       };

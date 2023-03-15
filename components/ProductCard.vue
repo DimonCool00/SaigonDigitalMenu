@@ -1,22 +1,32 @@
 <template>
     <div>
-            <div v-for="product in products" :key="product.id">
-                <div @click="showModal = true">
+            <div v-for="(product, index) in products" :key="product.id">
+              <p сlass="category-header"   v-if="index > 0 && product.category.name != products[index-1].category.name" 
+              style="font-family: 'Inter';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 18px;
+              line-height: 22px;
+              color: #383838;
+              margin: 18px 0 0 16px;">
+              {{ product.category.name }}</p>
                 <div class="product-card">
                     <div class="product-image" >
-                        <img :src="`https://testapi.rst.ozo.direct${product.images[0].imagePath}`" alt="Product Image">
+                        <img v-if="isImageLoaded && product.images && product.images[2] && product.images[2].imagePath" :src="`https://testapi.rst.ozo.direct${product.images[2].imagePath}`" alt="Product Image" @load="onImageLoad" @error="onImageError" >
+                        <div v-else class="image-placeholder">
+                            <p class="category-header">Failed to load Image</p>
+                        </div>
                     </div>
                     <div class="product-details">
                         <h2 class="product-title">{{ product.name }}</h2>
                         <p class="product-description">{{ product.description }}</p>
+                        <div :id="`menuitem-${index}`"></div>
                         <div class="product-button">
                             <span class="price">{{ product.price }} ₸</span>
                         </div>
                     </div>
                 </div>
-                <product-pop-up v-if="showModal" :product="product" @close="closeModal" ></product-pop-up>
-            </div>
-        </div>
+          </div>
         <!-- </div> -->
         <!-- <div class="overlay" v-if="showModal" @click="closeModal"></div>
         <div class="modal" v-if="showModal" @click.self="closeModal">
@@ -46,37 +56,36 @@
 
     export default {
     
-    components : {
-        ProductPopUp,
-    },
-    props: {
-        product: {
-      type: Object,
-      required: true,
-    },
-    },
+    // components : {
+    //     ProductPopUp,
+    // },
+    // props: {
+    //     product: {
+    //   type: Object,
+    //   required: true,
+    // },
+    // },
     data() {
       return {
-        showModal: false,
+        // showModal: false,
         searchText: '',
         products: [],
-        authToken: [],
+        token: "",
+        isImageLoaded: true,
       }
     },
     methods: {
-        openModal() {
-      this.$emit("open-modal");
+    //     openModal() {
+    //   this.$emit("open-modal");
+    // },
+    // closeModal() {
+    //   this.showModal = false;
+    // },
+    onImageLoad() {
+      this.isImageLoaded = true;
     },
-    showModal(product){
-        this.product=product;
-        this.showModal = true;
-    },
-    closeModal()
-    {
-        this.$emit('closeModal', false)
-    },
-    closeModal() {
-      this.showModal = false;
+    onImageError() {
+      this.isImageLoaded = false;
     },
     getAuthToken() {
       const body = {
@@ -96,6 +105,7 @@
         })
         .then((data) => {
           this.token = data.accessToken;
+          console.log("Token:", this.token);
           this.getRestaurantProducts();
         })
         .catch((error) => {
@@ -123,6 +133,8 @@
         })
         .then((data) => {
           this.products = data;
+          console.log("Products:", this.products);
+          // console.log(this.products.category.name)
         })
         .catch((error) => {
           console.error(error);
@@ -153,6 +165,13 @@
   </script>
   
   <style scoped>
+  .image-placeholder {
+    max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+  background-color: #ccc; /* серый цвет, который вы хотите использовать */
+  }  
   .product-card {
     display: grid;
     grid-template-columns: 1fr 2fr;
