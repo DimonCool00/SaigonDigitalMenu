@@ -17,6 +17,7 @@
     "node-fetch": "^2.6.6",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
+    "vue-multiple-back-top": "^1.0.2",
     "vue-scrollview": "^3.0.1",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
