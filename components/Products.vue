@@ -1,7 +1,7 @@
 <template>
   <div class="products">
     <div class="search-component">
-      <input type="search" class="search-component__input" placeholder="Поиск..." @keyup="search"/>
+      <input type="search" class="search-component__input" v-model="search" placeholder="Поиск..." @keyup="searchProducts"/>
       <svg width="17" height="17" class="search-component__icon">
         <use href="@/assets/icons/icons.svg#search-icon"></use>
       </svg>
@@ -23,20 +23,26 @@
         showModal: false,
         accessToken: '',
         showPopup: false,
+        search: '',
         categories: [],
         selectedCategory: null,
+        timer: null
       }
     },
     created() {
         this.getAuthToken();
     },
-    mounted() {
-
+    watch: {
+      // search() {
+      //   clearTimeout(this.timer);
+      //   this.timer = setTimeout(() => {
+      //     this.getRestaurantProducts('', true)
+      //   }, 800)
+      // }
     },
     methods: {
-      search(event) {
+      searchProducts(event) {
         this.getRestaurantProducts(event.target.value, true)
-        this.$forceUpdate()
       },
       getAuthToken() {
         const body = {
@@ -68,6 +74,7 @@
         }
       },
       getRestaurantProducts(event, bool) {
+        this.products = [];
         const url = `/api/product/GetRestaurantProducts?restaurantId=55DE9A40-561E-4F44-9AFF-9A8D048165FA`;
         const options = {
           headers: {
@@ -94,14 +101,19 @@
                 }
               });
             }
-            else this.products = data
-            this.getCategories()
+            else {
+              this.products = data
+            }
+            // setTimeout(() => {
+              this.getCategories();
+            // }, 600)
           })
           .catch((error) => {
             console.error(error);
           });
     },
       getCategories() {
+        this.categories = [];
         const url = `/api/Category/GetRestaurantCategories?restaurantId=55DE9A40-561E-4F44-9AFF-9A8D048165FA`;
         const options = {
           headers: {
@@ -120,39 +132,103 @@
             }
             return response.json();
           }).then(res => {
-            if(this.products && this.products.length) {
+            if (this.products && this.products.length) {
               for (let i = 0; i < this.products.length; i++) {
-                  for(let j =0; j < res.length; j++) {
-                    if(res[j].id == this.products[i].categoryId) {
-                      this.products[i].categoryName = res[j].name;
-                      this.categories.push({
-                        name: res[j].name,
-                        id: res[j].id,
-                        scrollId: `Category${j}`,
-                        products: []
-                      })
-                      this.categories = this.categories.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
-                    }
-                  }
-                    this.categories.forEach(item => {
-                      if(item.id === this.products[i].categoryId) {
-                        item.products.push({
-                          name: this.products[i].name,
-                          description: this.products[i].description,
-                          images: this.products[i].images,
-                          price: this.products[i].price
-                        })
-                      }
+                for (let j = 0; j < res.length; j++) {
+                  if (res[j].id == this.products[i].categoryId) {
+                    this.products[i].categoryName = res[j].name;
+                    this.categories.push({
+                      name: res[j].name,
+                      id: res[j].id,
+                      scrollId: `Category${j}`,
+                      products: [],
                     })
+                    this.categories = this.categories.filter((v, i, a) => a.findIndex(v2 => (v2.id === v.id)) === i)
+                  }
+                }
+                this.categories.forEach(item => {
+                  if (item.id === this.products[i].categoryId) {
+                    item.products.push({
+                      name: this.products[i].name,
+                      description: this.products[i].description,
+                      images: this.products[i].images,
+                      price: this.products[i].price,
+                      id: this.products[i].id
+                    })
+                  }
+                  switch (item.name) {
+                    case "Завтраки" : {
+                      item.position = 1;
+                      break;
+                    }
+                      ;
+                    case 'Салаты и закуски': {
+                      item.position = 2;
+                      break;
+                    }
+                      ;
+                    case 'Супы': {
+                      item.position = 3;
+                      break;
+                    }
+                    case 'Мясо и тофу' : {
+                      item.position = 4
+                      break;
+                    }
+                      ;
+                    case 'Морепродукты и рыба': {
+                      item.position = 5
+                      break;
+                    }
+                      ;
+                    case 'Лапша и рис': {
+                      item.position = 6;
+                      break;
+                    }
+                    case 'Суши' : {
+                      item.position = 7
+                      break;
+                    }
+                      ;
+                    case 'Гарниры': {
+                      item.position = 8;
+                      break;
+                    }
+                      ;
+                    case 'Десерты': {
+                      item.position = 9;
+                      break
+                    }
+                      ;
+                    case 'Хлеб': {
+                      item.position = 10;
+                      break;
+                    }
+                      ;
+                    case 'Безалкогольные напитки': {
+                      item.position = 11;
+                      break;
+                    }
+                      ;
+                    case 'Бутылочное пиво' : {
+                      item.position = 12;
+                      break;
+                    }
+                      ;
+                    case 'Закуски к пиву': {
+                      item.position = 13;
+                      break;
+                    }
+                      ;
+                  }
+                })
               }
-              console.log(this.categories)
-              // this.categories = this.categories.map(item => {
-              //   return {
-              //
-              //   }
-              // })
+
             }
-            }
+            this.categories.sort((a, b) => {
+              return a.position - b.position
+            })
+          }
         )
       }
     }
