@@ -88,6 +88,26 @@
             console.error(error);
           });
     },
+      getCategories() {
+        const url = `/api/Category/GetRestaurantCategories?restaurantId=55DE9A40-561E-4F44-9AFF-9A8D048165FA`;
+        const options = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers":
+              "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+          },
+        };
+        fetch(url, options)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to get restaurant products");
+            }
+            return response.json();
+          })
+      }
     }
   }
 </script>
