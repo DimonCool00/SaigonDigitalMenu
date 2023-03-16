@@ -43,6 +43,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+      ['vue-scrollto/nuxt', { duration: 300 }],
   ],
   proxy: {
     '/api/': {

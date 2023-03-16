@@ -12,6 +12,9 @@ export default {
 </script>
 
 <style>
+* {
+  scroll-behavior: smooth;
+}
 .product-popup {
   background: white !important;
   max-width: 390px;

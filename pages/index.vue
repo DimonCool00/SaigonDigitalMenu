@@ -1,9 +1,10 @@
 <template>
   <main>
+    <Navigation />
 <!--    <mobile-app-banner></mobile-app-banner>-->
 <!--    <UiVueHeader />-->
-<!--    <Products />-->
-    <UiVueFooter />
+    <Products />
+<!--    <UiVueFooter />-->
   </main>
 </template>
 
