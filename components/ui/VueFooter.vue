@@ -5,20 +5,22 @@
        <use href="@/assets/icons/icons.svg#footer-logo"></use>
      </svg>
    </nuxt-link>
-    <div class="d-flex flex-column">
-      <p>Скачать мобильное приложение</p>
+   <div class="d-flex flex-column" style="margin-top: 26px;">
+      <p class="footer-text">Скачать мобильное приложение</p>
       <div class="footer__apps">
         <img src="@/assets/images/footer/appstore.png"/>
         <img src="@/assets/images/footer/gp.png" />
       </div>
     </div>
     <div class="f-flex flex-column">
-      <p>Подписаться на нас</p>
+      <p class="footer-text">Подписаться на нас</p>
       <div class="d-flex align-center">
-        <svg v-for="item in 2" :key="item" class="footer__socials" width="29" height="29">
+        <a href="ссылка1"><img src="~/assets/facebook.svg"></a>
+        <a href="ссылка2" style="margin-left: 23px;"><img src="~/assets/instagram.svg"></a>
+        <!-- <svg class="footer__socials" width="29" height="29">
           <use href="@/assets/icons/icons.svg#footer-insta"></use>
-        </svg>
-      </div>
+        </svg> -->
+        </div>
     </div>
     <div class="footer__rules d-flex align-center justify-space-between">
       <span>Политика конфиденциальности</span>
@@ -39,9 +41,16 @@
 .footer {
   background: black;
   padding: 20px 15px;
-
+  &-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+  }
   &__apps {
-    margin: 26px 0;
+    margin-bottom: 26px;
     img {
       max-width: 147px;
       object-fit: cover;

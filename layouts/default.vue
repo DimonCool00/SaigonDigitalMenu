@@ -18,7 +18,7 @@ export default {
 .product-popup {
   background: white !important;
   max-width: 390px;
-  padding: 22px 15px;
+  padding: 9px 15px 22px 15px;
   align-self: flex-end  !important;
   margin: 0 !important;
 }

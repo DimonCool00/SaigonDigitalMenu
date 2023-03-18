@@ -1,10 +1,10 @@
 <template>
   <main>
     <Navigation />
-<!--    <mobile-app-banner></mobile-app-banner>-->
-<!--    <UiVueHeader />-->
+   <mobile-app-banner></mobile-app-banner>
+   <UiVueHeader />
     <Products />
-<!--    <UiVueFooter />-->
+   <UiVueFooter />
   </main>
 </template>
 
