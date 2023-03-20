@@ -40,7 +40,7 @@
 <style lang="scss" scoped>
 .footer {
   background: black;
-  padding: 20px 15px;
+  padding: 20px 15px 50px 15px;
   &-text {
     font-family: 'Inter';
     font-style: normal;

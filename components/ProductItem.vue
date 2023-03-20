@@ -9,8 +9,8 @@
         @click="openModal(product)"
       >
         <img
-          v-if="product.images.length && product.images[0]"
-          :src="`https://testapi.rst.ozo.direct${product.images[0].imagePath}`"
+          v-if="product.images.length && product.images[1]"
+          :src="`https://testapi.rst.ozo.direct${product.images[1].imagePath}`"
           class="product-item__image"
         />
         <img v-else src="@/assets/images/notload.png" class="product-item__image" />
@@ -100,7 +100,7 @@ export default {
 .w390 {
   max-width: 390px;
   width: 100%;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 .modal-line {
   background: #cdcdcd;
@@ -132,7 +132,7 @@ export default {
     max-width: 136px;
     width: 100%;
     height: 136px;
-    border-radius: 8px;
+    border-radius: 5px;
     margin-right: 13px;
     object-fit: cover;
   }
@@ -145,10 +145,10 @@ export default {
     }
     span {
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      margin: 5px;
+      margin: 5px 0 ;
       font-family: 'Inter';
       font-style: normal;
       font-weight: 400;

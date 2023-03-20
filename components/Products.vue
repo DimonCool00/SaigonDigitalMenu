@@ -1,5 +1,6 @@
 <template>
   <div class="products">
+    <vm-back-top :duration="250"></vm-back-top>
     <div class="search-component">
       <input
         type="search"
@@ -17,7 +18,7 @@
       active-class="active"
       :modifyUrl="false"
       :offset="80"
-      :duration="800"
+      :duration="150"
       bezier-easing-value=".5,0,.35,1"
     >
       <a
@@ -78,7 +79,7 @@ export default {
     },
 
     filteredItems() {
-      return Object.fromEntries(
+     return Object.fromEntries(
         Object.entries(this.items).map(([key, value]) => {
           if (value) {
             return [
@@ -87,7 +88,8 @@ export default {
             ];
           }
         })
-      )
+      );
+      
     },
   },
 
@@ -200,10 +202,11 @@ export default {
   max-width: 390px;
   width: 100%;
   height: 40px;
+  // margin: 0 auto;
   margin: 0 auto;
-
   display: flex;
   position: relative;
+  flex-direction: row;
 
   &__input {
     background: #f0f1f3;
@@ -233,11 +236,11 @@ export default {
   top: -1px; // 0
   background: #ffffff;
   overflow-x: scroll;
-  margin: 10px 0 20px;
+  margin: 10px -25px 20px -18px;
   // margin-top: 20px;
   box-shadow: 0px 3px 0px rgba(137, 113, 113, 0.09);
   height: 45px;
-  padding: 0 0 0 5px !important;
+  padding: 0 0 0 15px !important;
   body::-webkit-scrollbar {
     display: none;
   }
@@ -247,6 +250,9 @@ export default {
     margin-right: 12px;
     text-decoration: none;
     cursor: pointer;
+    .scrollactive-item:first-child {
+      margin-left: 5px;
+    }
     h3 {
       width: max-content;
       font-family: 'Inter';
@@ -276,6 +282,29 @@ export default {
   }
 }
 .products {
-  padding: 0 12px;
+  padding: 0 25px 0 18px;
+}
+:deep(.vm-back-top-inner:hover) {
+  background-color: #E40613;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+:deep(.vm-back-top-inner) {
+  background-color: #E40613;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+:deep(.vm-back-top i) {
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 15px;
+  /* border-radius: 50%; */
+  /* padding: 20px; */
 }
 </style>

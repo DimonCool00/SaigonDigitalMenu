@@ -13,7 +13,7 @@ export default {
 
 <style>
 * {
-  scroll-behavior: smooth;
+   scroll-behavior: smooth; /* Закоментить если хотеть без плавности */
 }
 .product-popup {
   background: white !important;
