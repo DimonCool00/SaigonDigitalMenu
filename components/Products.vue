@@ -30,7 +30,6 @@
         <h3 v-text="category.name"></h3>
       </a>
     </scrollactive>
-
     <ProductItem
       v-for="[categoryId, products], idx in Object.entries(filteredItems)"
       :key="idx"
@@ -39,6 +38,8 @@
       :categoryName="getCategoryMeta(categoryId).name"
       :showPopup="showPopup"
     />
+    <!-- Для отображения данного сообщения   -->
+    <div v-if="message" class="search-notfound">{{ message }}</div>
   </div>
 </template>
 
@@ -78,18 +79,37 @@ export default {
       }), {})
     },
 
+    // Фильтрация где просто выподиться пустой белый экран
+    // filteredItems() {
+    //  return Object.fromEntries(
+    //     Object.entries(this.items).map(([key, value]) => {
+    //       if (value) {
+    //         return [
+    //           key,
+    //           value.filter(({ name }) => name.toLowerCase().includes(this.search.toLowerCase())) 
+    //         ];
+    //       }
+    //     })
+    //   );
+      
+    // },
+
+    //Фильтрация с сообщением 
     filteredItems() {
-     return Object.fromEntries(
+      const filtered = Object.fromEntries(
         Object.entries(this.items).map(([key, value]) => {
           if (value) {
-            return [
-              key,
-              value.filter(({ name }) => name.toLowerCase().includes(this.search.toLowerCase()))
-            ];
+            const filteredValue = value.filter(({ name }) =>
+              name.toLowerCase().includes(this.search.toLowerCase())
+            );
+            return [key, filteredValue];
           }
+          return [key, []];
         })
       );
-      
+      const hasResults = Object.values(filtered).some((value) => value.length > 0);
+      this.message = hasResults ? " " : "По вашему запросу ничего не найдено."; // устанавливаем сообщение в зависимости от наличия результатов
+      return filtered;
     },
   },
 
@@ -198,6 +218,16 @@ export default {
 .navigation::-webkit-scrollbar-thumb {
   background-color: #ffffff;
 }
+.search-notfound {
+    // display: flex;
+    margin: 0 auto;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    
+}
 .search-component {
   max-width: 390px;
   width: 100%;
@@ -283,6 +313,7 @@ export default {
 }
 .products {
   padding: 0 25px 0 18px;
+  min-height: 600px;
 }
 :deep(.vm-back-top-inner:hover) {
   background-color: #E40613;
