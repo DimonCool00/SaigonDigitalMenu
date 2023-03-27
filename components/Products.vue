@@ -355,12 +355,7 @@ export default {
 // .navigation a:last-child {
 //   // margin-right: 350px;
 // }
-.navigation {
-  // margin-left: 350px;
-  // margin-right: 350px;
-  //  margin: 0 auto;
-  //  justify-content: center;
-}
+
 .products[data-v-313e7082] {
     margin: 0 auto;
     min-height: 600px;
