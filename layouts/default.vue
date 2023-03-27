@@ -27,4 +27,17 @@ export default {
     max-width: 100%;
   }
 }
+@media screen and (min-width: 1000px) {
+  .product-popup {
+    max-width: 600px;
+    align-self: unset  !important;
+  }
+  /* .banner {
+    opacity: 0;
+    padding-top: -200px;
+  } */
+  .modal-line {
+    opacity: 0;
+  }
+}
 </style>

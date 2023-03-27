@@ -39,7 +39,7 @@
       :showPopup="showPopup"
     />
     <!-- Для отображения данного сообщения   -->
-    <div v-if="message" class="search-notfound">{{ message }}</div>
+    <div v-if="message" class="search-notfound d-flex justify-center">{{ message }}</div>
   </div>
 </template>
 
@@ -108,7 +108,7 @@ export default {
         })
       );
       const hasResults = Object.values(filtered).some((value) => value.length > 0);
-      this.message = hasResults ? " " : "По вашему запросу ничего не найдено."; // устанавливаем сообщение в зависимости от наличия результатов
+      this.message = hasResults ? " " : `По запросу "${this.search}" ничего не найдено.`; // устанавливаем сообщение в зависимости от наличия результатов
       return filtered;
     },
   },
@@ -338,4 +338,34 @@ export default {
   /* border-radius: 50%; */
   /* padding: 20px; */
 }
+@media screen and (min-width: 1089px)  {
+  .navigation {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 850px) and (max-width: 3000px) {
+//   .navigation[data-v-313e7082] {
+//     margin-left: 90px;
+//     padding-left: 217px !important;
+// }
+// .navigation a:first-child {
+//   // margin-left: 350px;
+// }
+// .navigation a:last-child {
+//   // margin-right: 350px;
+// }
+.navigation {
+  // margin-left: 350px;
+  // margin-right: 350px;
+  //  margin: 0 auto;
+  //  justify-content: center;
+}
+.products[data-v-313e7082] {
+    margin: 0 auto;
+    min-height: 600px;
+}
+}
+
+
 </style>

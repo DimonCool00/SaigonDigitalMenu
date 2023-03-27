@@ -1,7 +1,8 @@
 <template>
   <div class="d-flex flex-column w390" v-if="products.length">
     <h3 class="category-name">{{ categoryName }}</h3>
-    <div class="mt-4 d-flex flex-column">
+    <div class="mt-4 card-pos">
+      <!-- d-flex flex-column -->
       <div
         class="product-item d-flex"
         v-for="product in products"
@@ -21,7 +22,7 @@
         </div>
       </div>
     </div>
-    <v-dialog v-if="selectedProduct.images" content-class="product-popup" v-model="showPopup">
+    <v-dialog v-if="selectedProduct.images" content-class="product-popup" v-model="showPopup" class="pop-up-vue">
       <div class="modal-line d-flex align-center" @click="closeModal"></div>
       <div class="product-popup__header d-flex justify-space-between align-center">
         <h2 class="product-popup__category">{{ categoryName }}</h2>
@@ -100,7 +101,8 @@ export default {
 .w390 {
   max-width: 390px;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 30px !important;
+  margin: 0 auto;
 }
 .modal-line {
   background: #cdcdcd;
@@ -123,8 +125,12 @@ export default {
   color: #383838;
   margin-bottom: 0px;
 }
+.card-pos {
+  display: flex;
+  flex-direction: column;
+}
 .product-item {
-  margin-bottom: 10px;
+  margin-bottom: 10px ;
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -160,6 +166,7 @@ export default {
       background: #f0f1f3;
       border-radius: 5px;
       max-width: 107px;
+      min-width: 107px;
       width: 100%;
       height: 35px;
       display: flex;
@@ -216,5 +223,56 @@ export default {
       object-fit: cover;
     }
   }
+}
+@media screen and (min-width: 1000px) {
+  .w390 {
+    max-width: 1300px;
+    margin: 0 auto;
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: row;
+  }
+  .navigation[data-v-313e7082] {
+    padding: 0 300px 0 300px !important;
+    width: 100%;
+}
+.card-pos {
+  display: grid;
+  gap: 15px 30px;
+  grid-template: repeat(1, 1fr) / repeat(3, 1fr);
+  grid-auto-flow: row;
+}
+.pop-up-vue {
+    max-width: 890px !important;
+    padding: 9px 15px 22px 15px;
+}
+// .w390 .category-name:first-child {
+//     margin-top: 18px;
+//   }
+}
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .w390 {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: row;
+  }
+  // .w390 .category-name:first-child {
+  //   margin-top: 18px;
+  // }
+
+  .navigation[data-v-313e7082] {
+    padding: 0 300px 0 300px !important;
+    background: #FFFFFF;
+    width: 100%;
+}
+  .card-pos {
+  display: grid;
+  gap: 15px 30px;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  grid-auto-flow: row;
+}
+
 }
 </style>

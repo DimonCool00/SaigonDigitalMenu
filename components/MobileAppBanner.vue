@@ -1,5 +1,5 @@
 <template>
-  <div class="banner" v-if="showBanner">
+  <div class="banner d-flex align-center justify-center" v-if="showBanner">
     <span class="close" @click="hideBanner">×</span>
     <div class="content">
       <img src="../assets/Android.png" alt="Мобильное приложение" class="img" />
@@ -18,25 +18,26 @@
 .banner {
   position: relative;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: #f2f2f2;
-  padding: 0 10px 0 15px;
+  padding: 0 15px 0 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 .content {
   display: flex;
   align-items: center;
+  /* width: 100%;  */
+  margin: 0 auto;
 }
 
 .img {
   width: 56px;
   height: 56px;
-  margin: 8px 11px;
+  margin: 11px 8px;
 }
 
 .text {
@@ -64,7 +65,7 @@
   display: flex;
   align-items: center;
   color: #000000;
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
 }
 .banner_text {
   color: #383838;

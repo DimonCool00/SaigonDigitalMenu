@@ -6,7 +6,7 @@
      </svg>
    </nuxt-link>
    <div class="d-flex flex-column" style="margin-top: 26px;">
-      <p class="footer-text">Скачать мобильное приложение</p>
+      <p class="footer-text text-tablet">Скачать мобильное приложение</p>
       <div class="footer__apps">
         <img src="@/assets/images/footer/appstore.png"/>
         <img src="@/assets/images/footer/gp.png" />
@@ -14,17 +14,32 @@
     </div>
     <div class="f-flex flex-column">
       <p class="footer-text">Подписаться на нас</p>
-      <div class="d-flex align-center">
-        <a href="ссылка1"><img src="~/assets/facebook.svg"></a>
-        <a href="ссылка2" style="margin-left: 23px;"><img src="~/assets/instagram.svg"></a>
+      <div class="d-flex align-center icon-tablet">
+        <a 
+          href="https://www.facebook.com/coffeeonsaigon/" 
+          target="_blank"
+        >
+          <img src="~/assets/facebook.svg">
+        </a>
+        <a 
+          href="https://www.instagram.com/coffeeon_saigon/2"
+          target="_blank" 
+          style="margin-left: 23px;"
+        >
+          <img src="~/assets/instagram.svg">
+        </a>
         <!-- <svg class="footer__socials" width="29" height="29">
           <use href="@/assets/icons/icons.svg#footer-insta"></use>
         </svg> -->
         </div>
     </div>
     <div class="footer__rules d-flex align-center justify-space-between">
-      <span>Политика конфиденциальности</span>
-      <span>Публичная оферта</span>
+      <a href="https://testapi.rst.ozo.direct/Doc/ConfidentialityPolicy.pdf" target="_blank">
+        <span>Политика конфиденциальности</span>
+      </a>
+      <a>
+        <span>Публичная оферта</span>
+      </a>
     </div>
     <br />
     <blockquote class="footer__blockquote">
@@ -78,6 +93,9 @@
       line-height: 16px;
       color: #CDCDCD;
     }
+    a {
+      text-decoration: none;
+    }
   }
   blockquote {
     font-family: 'Inter';
@@ -95,5 +113,28 @@ p, div {
   .footer {
     align-items: unset !important;
   }
+}
+
+@media screen and (min-width: 600px) {
+  .footer {
+    &-text{
+      align-items: unset !important;
+    }
+  }
+  .footer__rules span:first-child {
+    padding-left: 0px !important;
+  }
+  .footer__rules a:last-child {
+    padding-left: 30px;
+  }
+  .text-tablet {
+    text-align: center !important;
+  }
+.icon-tablet {
+  justify-content: space-evenly;
+}
+.icon-tablet a:last-child {
+  margin-left: 0px !important;
+}
 }
 </style>
